@@ -28,3 +28,6 @@ Route::group(['middleware'=>'auth'], function() {
 
 });
 
+Route::get('/protected', ['middleware' => ['auth', 'admin'], function() {
+    return 'plz work';
+}]);

@@ -45,6 +45,10 @@ html, body {
     text-transform: uppercase;
 }
 
+a:hover {
+    color: #f4645f;
+}
+
 .m-b-md {
     margin-bottom: 30px;
 }
