@@ -28,6 +28,7 @@ Route::group(['middleware'=>'auth'], function() {
 
 });
 
-Route::get('/protected', ['middleware' => ['auth', 'admin'], function() {
-    return 'plz work';
-}]);
+Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'admin']], function() {
+    Route::get('/', ['as'=>'admin.users.index', 'uses'=>'UserController@index']);
+    Route::get('/edit/{id}', ['as'=>'admin.users.edit', 'uses'=>'UserController@edit']);
+});
