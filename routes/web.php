@@ -29,6 +29,8 @@ Route::group(['middleware'=>'auth'], function() {
 });
 
 Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'admin']], function() {
-    Route::get('/', ['as'=>'admin.users.index', 'uses'=>'UserController@index']);
-    Route::get('/edit/{id}', ['as'=>'admin.users.edit', 'uses'=>'UserController@edit']);
+    Route::get('/', ['as'=>'admin.index', 'uses'=>'UserController@index']);
+    Route::get('users/edit/{id}', ['as'=>'admin.users.edit', 'uses'=>'UserController@edit']);
+    Route::patch('users/{id}', ['as'=>'user.update', 'uses'=>'UserController@update']);
 });
+
