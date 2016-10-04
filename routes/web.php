@@ -14,23 +14,26 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+Route::group(['middleware'=>['web']], function() {
 
-Route::get('/logout', ['middleware'=>'auth', 'uses'=>'Auth\LoginController@logout']);
-Auth::routes();
+    Route::get('/logout', ['middleware' => 'auth', 'uses' => 'Auth\LoginController@logout']);
+    Auth::routes();
 
-Route::get('/', function() {
-    return view('pages.index');
-});
+    Route::get('/', function () {
+        return view('pages.index');
+    });
 
-Route::group(['middleware'=>'auth'], function() {
+    Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/home', 'HomeController@index');
+        Route::get('/home', 'HomeController@index');
 
-});
+    });
 
-Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'admin']], function() {
-    Route::get('/', ['as'=>'admin.index', 'uses'=>'UserController@index']);
-    Route::get('users/edit/{id}', ['as'=>'admin.users.edit', 'uses'=>'UserController@edit']);
-    Route::patch('users/{id}', ['as'=>'user.update', 'uses'=>'UserController@update']);
+    Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+        Route::get('/', ['as' => 'admin.index', 'uses' => 'UserController@index']);
+        Route::get('users/edit/{id}', ['as' => 'admin.users.edit', 'uses' => 'UserController@edit']);
+        Route::patch('users/{id}', ['as' => 'user.update', 'uses' => 'UserController@update']);
+    });
+
 });
 

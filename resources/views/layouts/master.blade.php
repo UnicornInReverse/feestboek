@@ -31,6 +31,10 @@
     <div class="content">
         @yield('content')
     </div>
+
+    <div class="has-error">
+        @yield('error')
+    </div>
 </div>
 </body>
 </html>

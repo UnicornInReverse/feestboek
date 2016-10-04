@@ -24,8 +24,13 @@ class UserController extends Controller
     
     public function update(Request $request, User $id){
 
-        $id->update($request->all());
+        $this->validate($request, [
+            'name'=>'required',
+            'email'=>'required|email',
+            'admin'=>'required|min:0|max:1|integer'
+        ]);
 
+        $id->update($request->all());
 
         return Redirect::route('admin.index');
     }

@@ -15,11 +15,20 @@
     </div>
     <div class="form-group">
         {!! Form::label('admin', 'Admin') !!}
-        {!! Form::text('admin', $user->admin, ['class'=>'form-control', 'id'=>'content']) !!}
+        {!! Form::select('admin', array('0'=>'0', '1'=>'1'),$user->admin, ['class'=>'form-control', 'id'=>'content']) !!}
     </div>
         {{ csrf_field() }}
     <div>
     {!! Form::submit('Opslaan') !!}
+
+    @if(count($errors))
+        <ul>
+            @foreach($errors->all() as $error)
+                <br><li>{{$error}}</li>
+            @endforeach
+        </ul>
+    @endif
+
     </div>
 
     </form>

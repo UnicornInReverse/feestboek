@@ -17,8 +17,19 @@
             <td>{{$user->email}}</td>
             <td>{{$user->admin}}</td>
             <td><a href="{{ route('admin.users.edit', $user->id) }}">Edit</a></td>
+            <td><button>@if($user->admin==0)
+                            Make admin
+                            @else
+                            No admin
+                        @endif
+                </button></td>
         </tr>
     @endforeach
         </tbody>
     </table>
 @endsection
+
+
+
+
+
