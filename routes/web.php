@@ -11,9 +11,6 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 Route::group(['middleware'=>['web']], function() {
 
     Route::get('/logout', ['middleware' => 'auth', 'uses' => 'Auth\LoginController@logout']);
@@ -33,6 +30,8 @@ Route::group(['middleware'=>['web']], function() {
         Route::get('/', ['as' => 'admin.index', 'uses' => 'UserController@index']);
         Route::get('users/edit/{id}', ['as' => 'admin.users.edit', 'uses' => 'UserController@edit']);
         Route::patch('users/{id}', ['as' => 'user.update', 'uses' => 'UserController@update']);
+        Route::get('user/admin-update/{id}', ['as' => 'admin.update', 'uses' => 'UserController@adminUpdate']);
+        Route::delete('users/delete/{id}', ['as' => 'user.delete', 'uses' => 'UserController@delete']);
     });
 
 });

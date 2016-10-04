@@ -32,4 +32,10 @@
     </div>
 
     </form>
+
+    <form method="post" action="{{route('user.delete', $user->id) }}">
+        {{method_field('delete')}}
+    <button type="submit">Delete</button></a>
+        {{ csrf_field() }}
+    </form>
 @endsection

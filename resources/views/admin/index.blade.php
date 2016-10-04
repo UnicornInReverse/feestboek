@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+    <h1>Hallo, {{auth()->user()->name}}</h1>
     <h2>Users</h2>
     <table class="table table-responsive">
         <thead>
@@ -17,12 +18,13 @@
             <td>{{$user->email}}</td>
             <td>{{$user->admin}}</td>
             <td><a href="{{ route('admin.users.edit', $user->id) }}">Edit</a></td>
-            <td><button>@if($user->admin==0)
-                            Make admin
+            <td><a href="{{route('admin.update', $user->id) }}"><button>
+                        @if($user->admin==0)
+                        Make admin
                             @else
                             No admin
                         @endif
-                </button></td>
+                    </button></a></td>
         </tr>
     @endforeach
         </tbody>

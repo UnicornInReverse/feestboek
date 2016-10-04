@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use PhpParser\Node\Stmt\Else_;
 
 
 class UserController extends Controller
@@ -18,7 +19,7 @@ class UserController extends Controller
     }
 
     public function edit($id){
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return view('admin.edit')->with('user', $user);
     }
     
@@ -31,6 +32,28 @@ class UserController extends Controller
         ]);
 
         $id->update($request->all());
+
+        return Redirect::route('admin.index');
+    }
+    
+    public function adminUpdate($id){
+        $user = User::findOrFail($id);
+        if($user->admin == 1){
+            $user->admin = 0;
+        }
+        else {
+            $user->admin = 1;
+        }
+
+        $user->save();
+
+        return Redirect::route('admin.index');
+    }
+
+    public function delete($id) {
+        $user = User::findOrFail($id);
+
+        $user->delete();
 
         return Redirect::route('admin.index');
     }
