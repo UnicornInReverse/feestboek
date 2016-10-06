@@ -50,7 +50,7 @@ class UserController extends Controller
         return Redirect::route('admin.index');
     }
 
-    public function delete($id) {
+    public function destroy($id) {
         $user = User::findOrFail($id);
 
         $user->delete();

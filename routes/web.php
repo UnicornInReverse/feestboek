@@ -21,8 +21,8 @@ Route::group(['middleware'=>['web']], function() {
     });
 
     Route::group(['middleware' => 'auth'], function () {
-
-        Route::get('/home', 'HomeController@index');
+        Route::get('home', 'HomeController@index');
+        Route::any('home/search', ['as' => 'user.search', 'uses' => 'HomeController@search']);
 
     });
 
@@ -31,7 +31,7 @@ Route::group(['middleware'=>['web']], function() {
         Route::get('users/edit/{id}', ['as' => 'admin.users.edit', 'uses' => 'UserController@edit']);
         Route::patch('users/{id}', ['as' => 'user.update', 'uses' => 'UserController@update']);
         Route::get('user/admin-update/{id}', ['as' => 'admin.update', 'uses' => 'UserController@adminUpdate']);
-        Route::delete('users/delete/{id}', ['as' => 'user.delete', 'uses' => 'UserController@delete']);
+        Route::delete('users/destroy/{id}', ['as' => 'user.destroy', 'uses' => 'UserController@destroy']);
     });
 
 });

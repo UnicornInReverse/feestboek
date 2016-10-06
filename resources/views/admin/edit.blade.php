@@ -33,9 +33,9 @@
 
     </form>
 
-    <form method="post" action="{{route('user.delete', $user->id) }}">
+    <form method="post" action="{{route('user.destroy', $user->id) }}">
         {{method_field('delete')}}
-    <button type="submit">Delete</button></a>
+    <button type="submit">Delete</button>
         {{ csrf_field() }}
     </form>
 @endsection
