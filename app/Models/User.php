@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function isAdmin(){
         return $this->admin==1;
     }
+
+    public function beer() {
+        return $this->belongsToMany('App\Models\Beer');
+    }
 }

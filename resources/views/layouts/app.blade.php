@@ -11,7 +11,7 @@
     <title>Feestboek</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href={{asset("/css/app.css")}} rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -42,7 +42,8 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/home') }}">Bier</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

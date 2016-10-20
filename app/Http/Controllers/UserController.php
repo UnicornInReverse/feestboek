@@ -18,12 +18,12 @@ class UserController extends Controller
         return view('admin.index', compact('users'));
     }
 
-    public function edit($id){
-        $user = User::findOrFail($id);
+    public function edit(User $user){
+
         return view('admin.edit')->with('user', $user);
     }
     
-    public function update(Request $request, User $id){
+    public function update(Request $request, User $user){
 
         $this->validate($request, [
             'name'=>'required',
@@ -31,13 +31,13 @@ class UserController extends Controller
             'admin'=>'required|min:0|max:1|integer'
         ]);
 
-        $id->update($request->all());
+        $user->update($request->all());
 
         return Redirect::route('admin.index');
     }
     
-    public function adminUpdate($id){
-        $user = User::findOrFail($id);
+        public function adminUpdate(User $user){
+
         if($user->admin == 1){
             $user->admin = 0;
         }
@@ -50,8 +50,7 @@ class UserController extends Controller
         return Redirect::route('admin.index');
     }
 
-    public function destroy($id) {
-        $user = User::findOrFail($id);
+    public function destroy(User $user) {
 
         $user->delete();
 

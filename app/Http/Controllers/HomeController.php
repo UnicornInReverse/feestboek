@@ -23,16 +23,43 @@ class HomeController extends Controller
         return view('auth.home');
     }
 
-    public function search(Request $request){
+    public function search(Request $request) {
         $this->validate($request, [
-           'keyword' => 'required'
+            'keyword' => 'required'
         ]);
 
-        $keyword = $request->input('keyword');
+        $keyword = $request->get('keyword');
 
-        $users = User::where('name', 'LIKE', '%'.$keyword.'%')->get();
+        $users = User::where('name', 'LIKE', '%' . $keyword . '%')->paginate(2);
 
+        $users->appends(['keyword'=>$keyword]);
+
+        
         return view('auth.home', compact('users', 'keyword'));
+    }
+
+//    public function search(Request $request){
+//        if ($request->isMethod('post')) {
+//            $this->validate($request, [
+//                'keyword' => 'required'
+//            ]);
+//
+//            $keyword = $request->input('keyword');
+//            $request->session()->flash('keyword', $keyword);
+//
+//            $users = User::where('name', 'LIKE', '%' . $keyword . '%')->paginate(2);
+//
+//            return view('auth.home', compact('users', 'keyword'));
+//        }
+//
+//        else {
+//            $keyword = $request->session()->get('keyword');
+//            return view('auth.home', compact('keyword'));
+//        }
+//    }
+
+    public function show(User $user){
+        return view('auth.user', compact('user'));
     }
 }
 
