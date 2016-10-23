@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beer;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
 
 class UserBeerController extends Controller
 {
@@ -15,7 +17,8 @@ class UserBeerController extends Controller
      */
     public function index()
     {
-        return view ('auth.beer');
+        $beers = Beer::all();
+        return view('auth.beer', compact('beers'));
     }
 
     /**
@@ -31,18 +34,25 @@ class UserBeerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Beer $beer)
     {
-        //
+        $userID = auth()->user()->id;
+        if ($beer->hasBeer($userID)) {
+            $beer->removeBeer($userID);
+        } else {
+            $beer->addBeer($userID);
+        }
+
+        return Redirect::route('home.beer');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -53,7 +63,7 @@ class UserBeerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +74,8 @@ class UserBeerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -76,7 +86,7 @@ class UserBeerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

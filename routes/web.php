@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
 //    Route::match(['get', 'post'], 'home/search', ['as' => 'home.search',  'uses' => 'HomeController@search']);
     Route::get('users/{user}', ['as' => 'home.users', 'uses' => 'HomeController@show']);
     Route::get('beer', ['as' => 'home.beer', 'uses' => 'UserBeerController@index']);
+    Route::get('beer/add/{beer}', ['as' => 'beer.store', 'uses' => 'UserBeerController@store']);
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {

@@ -11,6 +11,12 @@
                         Dit is het profiel van {{$user->name}}<br>
                         <br>
 
+                        <ul>
+                            @foreach($user->beer as $beer)
+                                <li>{{$beer->name}}</li>
+                            @endforeach
+                        </ul>
+
                     </div>
                 </div>
             </div>
