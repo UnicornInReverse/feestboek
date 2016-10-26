@@ -17,7 +17,7 @@ class BeerController extends Controller
      */
     public function index()
     {
-        $beers = Beer::all();
+        $beers = Beer::paginate(5);
         return view('admin.beer.index', compact('beers'));
     }
 

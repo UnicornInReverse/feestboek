@@ -35,6 +35,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Beer');
     }
 
+    public function place() {
+        return $this->belongsToMany('App\Models\Place');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

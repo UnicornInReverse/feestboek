@@ -9,11 +9,21 @@
 
                     <div class="panel-body">
                         Dit is het profiel van {{$user->name}}<br>
-                        <br>
+                        <hr>
+
+                        <h4><b>Favoriete bieren</b></h4>
 
                         <ul>
                             @foreach($user->beer as $beer)
                                 <li>{{$beer->name}}</li>
+                            @endforeach
+                        </ul>
+
+                        <h4><b>Favoriete plekken</b></h4>
+
+                        <ul>
+                            @foreach($user->place as $place)
+                                <li>{{$place->name}}</li>
                             @endforeach
                         </ul>
 

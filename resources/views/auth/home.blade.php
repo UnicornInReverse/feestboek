@@ -8,21 +8,13 @@
                     <div class="panel-heading">Dashboard</div>
 
                     <div class="panel-body">
-                        Welkom {{auth()->user()->name}}<br>
-                        <br>
+                        Welkom {{auth()->user()->name}}
 
-                        <br><b>Bieren</b><br>
-                        @foreach(auth()->user()->beer as $beer)
-                            {{$beer->name}}<br>
-                        @endforeach
-
-
-                        <br>
+                        <hr>
                         <form method="get" action="{{ route('home.search') }}">
 
                             {!! Form::label('keyword', 'Zoek naar vrienden') !!}
                             {!! Form::text('keyword', isset($keyword) ? $keyword : '', ['class'=>'form-control', 'id'=>'content', 'placeholder' => 'Zoeken...']) !!}
-                            {{--{!! csrf_field() !!}--}}
                         </form>
 
                         <div><br>

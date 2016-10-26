@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Hallo, {{auth()->user()->name}}</h1>
-    <h2><a href="{{route('admin.index')}}">Users </a><b><u>Beers</u> </b><a href="{{route('admin.places')}}">Places</a></h2>
+    <h2><a href="{{route('admin.index')}}">Users </a><a href="{{route('admin.beers')}}">Beers</a> <b><u>Places</u></b></h2>
 
     <hr>
 
@@ -25,11 +25,11 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($beers as $beer)
+        @foreach($places as $place)
             <tr>
-                <td>{{$beer->name}}</td>
+                <td>{{$place->name}}</td>
                 <td><a href="">Edit</a></td>
-                <td><a href="{{route('admin.beers.delete', $beer->id)}}">
+                <td><a href="{{route('admin.places.delete', $place->id)}}">
                         <button>Delete</button>
                     </a></td>
             </tr>
@@ -37,5 +37,5 @@
 
         </tbody>
     </table>
-    {{ $beers->links() }}
+    {{ $places->links() }}
 @endsection

@@ -44,6 +44,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/beer') }}">Bier</a></li>
+                    <li><a href="{{ url('/places') }}">Plekken</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -69,6 +70,10 @@
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
+                                </li>
+
+                                <li>
+                                    <a href="{{route('home.users', auth()->user()->id)}}">Profiel</a>
                                 </li>
                             </ul>
                         </li>

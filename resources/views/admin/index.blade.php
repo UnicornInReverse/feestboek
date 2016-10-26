@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Hallo, {{auth()->user()->name}}</h1>
-    <h2><b><u>Users</u></b> <a href="{{route('admin.beers')}}">Beers</a></h2>
+    <h2><b><u>Users</u></b> <a href="{{route('admin.beers')}}">Beers </a><a href="{{route('admin.places')}}">Places</a></h2>
     <table class="table table-responsive">
         <thead>
         <tr>
