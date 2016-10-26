@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('users/{user}', ['as' => 'home.users', 'uses' => 'HomeController@show']);
     Route::get('beer', ['as' => 'home.beer', 'uses' => 'UserBeerController@index']);
     Route::get('beer/add/{beer}', ['as' => 'beer.store', 'uses' => 'UserBeerController@store']);
+    Route::get('friend/add/{user}', ['as' => 'friend.store', 'uses' => 'HomeController@store']);
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
@@ -35,5 +36,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('user/admin-update/{user}', ['as' => 'admin.update', 'uses' => 'UserController@adminUpdate']);
     Route::delete('users/destroy/{user}', ['as' => 'user.destroy', 'uses' => 'UserController@destroy']);
     Route::get('beers', ['as' => 'admin.beers', 'uses' => 'BeerController@index']);
-    Route::delete('beers/delete', ['as' => 'admin.beers.delete', 'uses' => 'BeerController@destroy']);
+    Route::get('beers/destroy/{beer}', ['as' => 'admin.beers.delete', 'uses' => 'BeerController@destroy']);
+    Route::post('beers', ['as' => 'admin.beers.delete', 'uses' => 'BeerController@store']);
 });

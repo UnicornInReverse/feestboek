@@ -34,4 +34,11 @@ class User extends Authenticatable
     public function beer() {
         return $this->belongsToMany('App\Models\Beer');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function friends() {
+        return $this->belongsToMany('User', 'friends', 'user_id', 'friend_id');
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Beer;
+use App\Models\Friend;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -10,6 +10,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use PhpParser\Node\Stmt\Else_;
+use Symfony\Component\Routing\Tests\Fixtures\RedirectableUrlMatcher;
 
 class HomeController extends Controller
 {
@@ -19,12 +20,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
 
         return view('auth.home');
     }
 
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         $this->validate($request, [
             'keyword' => 'required'
         ]);
@@ -33,9 +36,9 @@ class HomeController extends Controller
 
         $users = User::where('name', 'LIKE', '%' . $keyword . '%')->paginate(2);
 
-        $users->appends(['keyword'=>$keyword]);
+        $users->appends(['keyword' => $keyword]);
 
-        
+
         return view('auth.home', compact('users', 'keyword'));
     }
 
@@ -59,8 +62,21 @@ class HomeController extends Controller
 //        }
 //    }
 
-    public function show(User $user){
+    public function show(User $user)
+    {
         return view('auth.user', compact('user'));
+    }
+
+    public function store(User $user, Friend $friend)
+    {
+        $userID = auth()->user()->id;
+        if ($friend->hasFriend($userID)) {
+            $friend->removeFriend($userID);
+        } else {
+            $friend->addFriend($userID);
+        }
+
+        return Redirect::route('home');
     }
 }
 

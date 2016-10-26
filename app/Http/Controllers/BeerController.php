@@ -6,6 +6,7 @@ use App\Models\Beer;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
 
 class BeerController extends Controller
 {
@@ -38,7 +39,18 @@ class BeerController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $this->validate($request, [
+            'name'=>'required',
+        ]);
+
+        $beer = new Beer;
+
+        $beer->name = $request->name;
+
+        $beer->save();
+
+        return back();
+
     }
 
     /**
@@ -81,8 +93,10 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Beer $beer)
     {
-        //
+        $beer->delete();
+
+        return Redirect::route('admin.beers');
     }
 }
