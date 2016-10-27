@@ -11,7 +11,9 @@
     <title>Feestboek</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    {{--<link href={{asset("/css/app.css")}} rel="stylesheet">--}}
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
 
     <!-- Scripts -->
     <script>
@@ -42,7 +44,9 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/beer') }}">Bier</a></li>
+                    <li><a href="{{ url('/places') }}">Plekken</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -68,6 +72,10 @@
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
+                                </li>
+
+                                <li>
+                                    <a href="{{route('home.users', auth()->user()->id)}}">Profiel</a>
                                 </li>
                             </ul>
                         </li>
