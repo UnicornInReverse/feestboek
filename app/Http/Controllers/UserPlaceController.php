@@ -26,5 +26,13 @@ class UserPlaceController extends Controller
 
         return Redirect::route('home.places');
     }
+    
+    public function show (Place $place) {
+        return view ('auth.show', compact('place'));
+    }
+
+    public function storeReview (Request $request) {
+
+    }
 
 }

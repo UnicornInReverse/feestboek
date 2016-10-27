@@ -22,7 +22,7 @@
                             <tbody>
                             @foreach($places as $place)
                                 <tr>
-                                    <td><b>{{$place->name}}</b></td>
+                                    <td><b><a style="color: #000000" href="{{route('place.show', $place->id)}}">{{$place->name}}</a></b></td>
                                     <td><a href="{{route('place.store', $place->id)}}">
                                             @if($place->hasPlace(auth()->user()->id))
                                                 Verwijder favoriet
