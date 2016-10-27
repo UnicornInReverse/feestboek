@@ -43,6 +43,10 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function friends() {
-        return $this->belongsToMany('User', 'friends', 'user_id', 'friend_id');
+        return $this->belongsToMany('App\Models\User', 'user_friends', 'user_id', 'friend_id');
+    }
+
+    public function hasFriend($id) {
+        return $this->friends->contains($id);
     }
 }

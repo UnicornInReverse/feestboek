@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Place extends Model
 {
     protected $fillable = [
-       'name', 'user_id'  
+       'name', 'user_id', 'review'
     ];
 
     public function users()
@@ -28,5 +28,9 @@ class Place extends Model
     public function hasPlace($id)
     {
         return $this->users->contains($id);
+    }
+
+    public function reviews() {
+        return $this->hasMany('App\Models\Review');
     }
 }

@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('home/search', ['as'=>'home.search', 'uses'=>'HomeController@search']);
 //    Route::match(['get', 'post'], 'home/search', ['as' => 'home.search',  'uses' => 'HomeController@search']);
     Route::get('users/{user}', ['as' => 'home.users', 'uses' => 'HomeController@show']);
+    Route::get('users/{user}/add', ['as'=>'users.add', 'uses'=> 'HomeController@addFriend']);
     
     Route::get('beer', ['as' => 'home.beer', 'uses' => 'UserBeerController@index']);
     Route::get('beer/add/{beer}', ['as' => 'beer.store', 'uses' => 'UserBeerController@store']);
@@ -31,7 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('places', ['as' => 'home.places', 'uses' => 'UserPlaceController@index']);
     Route::get('place/add/{place}', ['as' => 'place.store', 'uses' => 'UserPlaceController@store']);
     Route::get('place/{place}', ['as' => 'place.show', 'uses' => 'UserPlaceController@show']);
-    Route::post('place', ['as' => 'place.store', 'uses' => 'UserPlaceController@storeReview']);
+    Route::post('place/{place}', ['as' => 'place.store', 'uses' => 'UserPlaceController@storeReview']);
     
     Route::get('friend/add/{user}', ['as' => 'friend.store', 'uses' => 'HomeController@store']);
 });

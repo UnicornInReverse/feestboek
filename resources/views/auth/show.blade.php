@@ -10,8 +10,17 @@
                     <div class="panel-body">
                         <h3>{{$place->name}}</h3>
                         <hr>
+                        <h2>Reviews</h2>
 
-                        {!!Form::open(['route' => 'place.store'])!!}
+                        @foreach($place->reviews as $review)
+                            <div class="well">
+                                <b>{{$review->user->name}}</b>
+                                <hr>
+                                {{$review->review}}
+                            </div>
+                        @endforeach
+
+                        {!!Form::open(['url' => 'place/'.$place->id])!!}
                         <div class="form-group">
                             {!! Form::label('review', 'Laat een review achter!') !!}
                             {!! Form::textarea('review', null, ['class' => 'form-control']) !!}

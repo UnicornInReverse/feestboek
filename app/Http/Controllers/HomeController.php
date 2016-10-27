@@ -67,16 +67,11 @@ class HomeController extends Controller
         return view('auth.user', compact('user'));
     }
 
-    public function store(User $user, Friend $friend)
-    {
-        $userID = auth()->user()->id;
-        if ($friend->hasFriend($userID)) {
-            $friend->removeFriend($userID);
-        } else {
-            $friend->addFriend($userID);
-        }
 
-        return Redirect::route('home');
+    public function addFriend(User $user) {
+        auth()->user()->friends()->toggle($user);
+
+        return redirect()->route('home');
     }
 }
 

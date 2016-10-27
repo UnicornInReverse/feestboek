@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Place;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -31,8 +32,18 @@ class UserPlaceController extends Controller
         return view ('auth.show', compact('place'));
     }
 
-    public function storeReview (Request $request) {
+    public function storeReview (Request $request, Place $place) {
+        $this->validate($request, [
+            'review'=>'required',
+        ]);
 
+        $review = new Review;
+        $review->review = $request->get('review');
+        $review->place_id = $place->id;
+        $review->user_id = auth()->user()->id;
+        $review->save();
+
+        return redirect()->route('place.show', $place->id);
     }
 
 }

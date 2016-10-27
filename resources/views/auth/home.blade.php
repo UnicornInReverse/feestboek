@@ -22,13 +22,19 @@
                                 @foreach($users as $user)
                                     <tr>
                                         <td><a href="{{route('home.users', $user->id)}}">{{$user->name}}</a></td>
-                                        <button><a href="{{route('friend.store', $user->id)}}">Add friend</a></button>
+                                        <a class="btn btn-info btn-xs" href="{{route('users.add', $user->id)}}">Add friend</a>
                                         <br>
                                     </tr>
                                 @endforeach
                                 {{$users->links()}}
                             @endif
                         </div>
+
+                        <hr>
+                        @foreach(auth()->user()->friends as $friend)
+                            {{ $friend->name }}
+                        @endforeach
+
                     </div>
                 </div>
             </div>
