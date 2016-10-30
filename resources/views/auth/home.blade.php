@@ -11,6 +11,12 @@
                         Welkom {{auth()->user()->name}}
 
                         <hr>
+                        <h4><b>Vrienden</b></h4>
+                        @foreach(auth()->user()->friends as $friend)
+                            {{ $friend->name }}<br>
+                        @endforeach
+                        <hr>
+
                         <form method="get" action="{{ route('home.search') }}">
 
                             {!! Form::label('keyword', 'Zoek naar vrienden') !!}
@@ -18,22 +24,37 @@
                         </form>
 
                         <div><br>
-                            @if(isset($users))
-                                @foreach($users as $user)
+                            @if(isset($users) && $users->count())
+
+                                <table class="table-responsive">
+                                    <thead>
                                     <tr>
-                                        <td><a href="{{route('home.users', $user->id)}}">{{$user->name}}</a></td>
-                                        <a class="btn btn-info btn-xs" href="{{route('users.add', $user->id)}}">Add friend</a>
-                                        <br>
+                                        <th width="70%">Resultaten</th>
                                     </tr>
-                                @endforeach
+                                    </thead>
+                                    <tbody>
+                                    @foreach($users as $user)
+                                        <tr>
+                                            <td><a href="{{route('home.users', $user->id)}}">{{$user->name}}</a></td>
+                                            <td><a class="btn btn-info btn-xs" href="{{route('users.add', $user->id)}}">
+                                                    @if(auth()->user()->hasFriend($user->id))
+                                                        Remove friend
+                                                    @else
+                                                        Add friend
+                                                    @endif
+                                                </a></td>
+                                        </tr>
+
+                                    @endforeach
+                                    </tbody>
+                                </table>
                                 {{$users->links()}}
+                            @else
+                                Geen resultaten gevonden.
                             @endif
                         </div>
 
                         <hr>
-                        @foreach(auth()->user()->friends as $friend)
-                            {{ $friend->name }}
-                        @endforeach
 
                     </div>
                 </div>

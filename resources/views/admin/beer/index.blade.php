@@ -28,7 +28,6 @@
         @foreach($beers as $beer)
             <tr>
                 <td>{{$beer->name}}</td>
-                <td><a href="">Edit</a></td>
                 <td><a href="{{route('admin.beers.delete', $beer->id)}}">
                         <button>Delete</button>
                     </a></td>

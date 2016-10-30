@@ -6,6 +6,7 @@
 
     <hr>
 
+
     {!! Form::open() !!}
     <div class="form-group">
         {!! Form::label('name', 'Nieuw:') !!}<br>
@@ -18,6 +19,7 @@
     {!! Form::close() !!}
 
 
+
     <table class="table table-responsive">
         <thead>
         <tr>
@@ -28,7 +30,6 @@
         @foreach($places as $place)
             <tr>
                 <td>{{$place->name}}</td>
-                <td><a href="">Edit</a></td>
                 <td><a href="{{route('admin.places.delete', $place->id)}}">
                         <button>Delete</button>
                     </a></td>
