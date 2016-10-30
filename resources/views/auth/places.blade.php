@@ -23,7 +23,7 @@
                             @foreach($places as $place)
                                 <tr>
                                     <td><b><a href="{{route('place.show', $place->id)}}">{{$place->name}}</a></b></td>
-                                    <td><a href="{{route('place.store', $place->id)}}">
+                                    <td><a href="{{route('places.store', $place->id)}}">
                                             @if($place->hasPlace(auth()->user()->id))
                                                 Verwijder favoriet
                                             @else

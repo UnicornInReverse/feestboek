@@ -20,6 +20,7 @@
                             </div>
                         @endforeach
 
+                        @if(auth()->user()->place->count() > 2)
                         {!!Form::open(['url' => 'place/'.$place->id])!!}
                         <div class="form-group">
                             {!! Form::label('review', 'Laat een review achter!') !!}
@@ -31,7 +32,11 @@
                         </div>
 
                         {!!Form::close()!!}
-
+                        @else
+                            <div class="alert alert-info">
+                                Je moet 3 plekken toevoegen om een review ergens achter te laten.
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

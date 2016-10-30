@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('beer/add/{beer}', ['as' => 'beer.store', 'uses' => 'UserBeerController@store']);
     
     Route::get('places', ['as' => 'home.places', 'uses' => 'UserPlaceController@index']);
-    Route::get('place/add/{place}', ['as' => 'place.store', 'uses' => 'UserPlaceController@store']);
+    Route::get('place/add/{place}', ['as' => 'places.store', 'uses' => 'UserPlaceController@store']);
     Route::get('place/{place}', ['as' => 'place.show', 'uses' => 'UserPlaceController@show']);
     Route::post('place/{place}', ['as' => 'place.store', 'uses' => 'UserPlaceController@storeReview']);
     

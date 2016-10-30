@@ -34,7 +34,7 @@ class HomeController extends Controller
 
         $keyword = $request->get('keyword');
 
-        $users = User::where('name', 'LIKE', '%' . $keyword . '%')->paginate(2);
+        $users = User::where('name', 'LIKE', '%' . $keyword . '%')->orWhere('email', 'LIKE', '%' . $keyword . '%')->paginate(2);
 
         $users->appends(['keyword' => $keyword]);
 
